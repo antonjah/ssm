@@ -8,9 +8,9 @@ import (
 	"strings"
 	"syscall"
 
-	"ssm/internal/config"
-	"ssm/internal/menu"
-	"ssm/internal/tmux"
+	"github.com/antonjah/ssm/internal/config"
+	"github.com/antonjah/ssm/internal/menu"
+	"github.com/antonjah/ssm/internal/tmux"
 )
 
 func main() {

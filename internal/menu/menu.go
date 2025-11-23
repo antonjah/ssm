@@ -11,7 +11,7 @@ import (
 	"sort"
 	"strings"
 
-	"ssm/internal/config"
+	"github.com/antonjah/ssm/internal/config"
 
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/key"

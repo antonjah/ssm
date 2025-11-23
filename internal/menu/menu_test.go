@@ -1,8 +1,9 @@
 package menu
 
 import (
-	"ssm/internal/config"
 	"testing"
+
+	"github.com/antonjah/ssm/internal/config"
 )
 
 func TestHostItem_FilterValue(t *testing.T) {

@@ -1,4 +1,4 @@
-module ssm
+module github.com/antonjah/ssm
 
 go 1.24.0
 
