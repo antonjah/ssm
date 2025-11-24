@@ -27,6 +27,7 @@ Host server1
 Host server2
     HostName example.com
     User anotheruser
+    IdentityFile /home/foo/.ssh/id_rsa
 ```
 
 2. Run the program:
