@@ -14,14 +14,14 @@
       {
         packages.default = pkgs.buildGoModule {
           pname = "ssm";
-          version = "0.0.1";
+          version = "1.0.1";
           src = ./.;
           vendorHash = null;
 
           meta = with pkgs.lib; {
             description = "ssm - a TUI for managing ssh connections";
             license = licenses.mit;
-            maintainers = [ ];
+            maintainers = [ antonjah ];
             mainProgram = "ssm";
           };
         };
