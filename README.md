@@ -2,6 +2,8 @@
 
 A simple terminal-based SSH host selector written in Go. It parses your `~/.ssh/config` file and presents a interactive menu to choose which host to connect to.
 
+![](./assets/scrot.png)
+
 ## Features
 
 - Parses SSH config files automatically
