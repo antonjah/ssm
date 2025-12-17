@@ -13,6 +13,7 @@ import (
 
 	"github.com/antonjah/ssm/internal/config"
 
+	catppuccin "github.com/catppuccin/go"
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/list"
@@ -21,6 +22,9 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
+
+// Use Catppuccin Mocha flavor
+var mocha = catppuccin.Mocha
 
 var docStyle = lipgloss.NewStyle().Margin(1, 2)
 
@@ -70,6 +74,23 @@ type customDelegate struct {
 
 func newCustomDelegate() customDelegate {
 	d := list.NewDefaultDelegate()
+
+	// Apply Catppuccin Mocha colors
+	d.Styles.SelectedTitle = d.Styles.SelectedTitle.
+		Foreground(lipgloss.Color(mocha.Mauve().Hex)).
+		BorderForeground(lipgloss.Color(mocha.Mauve().Hex))
+	d.Styles.SelectedDesc = d.Styles.SelectedDesc.
+		Foreground(lipgloss.Color(mocha.Subtext0().Hex)).
+		BorderForeground(lipgloss.Color(mocha.Mauve().Hex))
+	d.Styles.NormalTitle = d.Styles.NormalTitle.
+		Foreground(lipgloss.Color(mocha.Text().Hex))
+	d.Styles.NormalDesc = d.Styles.NormalDesc.
+		Foreground(lipgloss.Color(mocha.Subtext1().Hex))
+	d.Styles.DimmedTitle = d.Styles.DimmedTitle.
+		Foreground(lipgloss.Color(mocha.Overlay0().Hex))
+	d.Styles.DimmedDesc = d.Styles.DimmedDesc.
+		Foreground(lipgloss.Color(mocha.Overlay0().Hex))
+
 	return customDelegate{defaultDelegate: d}
 }
 
@@ -168,6 +189,15 @@ func NewModel(hosts []config.Host) Model {
 	hostList.SetFilteringEnabled(true)
 	hostList.SetShowTitle(false)
 
+	// Apply Catppuccin Mocha colors to list styles
+	hostList.Styles.Title = hostList.Styles.Title.
+		Foreground(lipgloss.Color(mocha.Mauve().Hex)).
+		Bold(true)
+	hostList.Styles.FilterPrompt = hostList.Styles.FilterPrompt.
+		Foreground(lipgloss.Color(mocha.Mauve().Hex))
+	hostList.Styles.FilterCursor = hostList.Styles.FilterCursor.
+		Foreground(lipgloss.Color(mocha.Pink().Hex))
+
 	return Model{
 		list: hostList,
 		help: help.New(),
@@ -233,8 +263,9 @@ func (m Model) View() string {
 			Margin(1, 2).
 			Padding(1, 2).
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color("5")).
-			Foreground(lipgloss.Color("#FFFFFF")).
+			BorderForeground(lipgloss.Color(mocha.Mauve().Hex)).
+			Foreground(lipgloss.Color(mocha.Text().Hex)).
+			Background(lipgloss.Color(mocha.Base().Hex)).
 			Width(60) // Fixed width for better centering
 
 		styledPopup := popupStyle.Render(popupContent)
