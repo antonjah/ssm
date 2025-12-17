@@ -13,8 +13,58 @@ A simple terminal-based SSH host selector written in Go. It parses your `~/.ssh/
 
 ## Installation
 
+### Using Go
+
 ```bash
 go install github.com/antonjah/ssm/cmd/ssm@latest
+```
+
+### Using Nix Flakes
+
+Add ssm as an input to your flake:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    ssm.url = "github:antonjah/ssm";
+    ssm.inputs.nixpkgs.follows = "nixpkgs";
+  };
+}
+```
+
+Then use it in one of two ways:
+
+#### As a package
+
+```nix
+{
+  home.packages = [
+    inputs.ssm.packages.${system}.default
+  ];
+}
+```
+
+Or with an overlay:
+
+```nix
+{
+  nixpkgs.overlays = [ inputs.ssm.overlays.default ];
+  
+  home.packages = with pkgs; [
+    ssm
+  ];
+}
+```
+
+#### As a home-manager module
+
+```nix
+{
+  imports = [ inputs.ssm.homeModules.default ];
+
+  programs.ssm.enable = true;
+}
 ```
 
 ## Usage
