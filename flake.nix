@@ -8,10 +8,9 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     let
-      # Define the package for a given system
       mkPackage = pkgs: pkgs.buildGoModule {
         pname = "ssm";
-        version = "1.0.1";
+        version = "1.0.3";
         src = ./.;
         vendorHash = "sha256-WukLNCsgqAck5LMmY//kFfYst2U1JmKt73BT4H4QcVQ=";
 
@@ -24,7 +23,6 @@
         };
       };
 
-      # Define the home-manager module
       homeManagerModule = { config, lib, pkgs, ... }:
         let
           cfg = config.programs.ssm;
@@ -64,12 +62,10 @@
           ];
         };
       }) // {
-      # Overlay for adding ssm to nixpkgs
       overlays.default = final: prev: {
         ssm = mkPackage final;
       };
 
-      # Home-manager module
       homeModules.default = homeManagerModule;
       homeModules.ssm = homeManagerModule;
     };
